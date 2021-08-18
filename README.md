@@ -13,24 +13,24 @@ Utilizando PHP + Laravel + Postgres + GraphQL, foi desenvolvido uma API pública
 
 ## Configuração
 
-O projeto depende de alguns serviços, como o php-fpm, postgres e nginx, dito isso algumas portas são necessárias para que o projeto funcione corretamente, sendo elas a 8000 e 5432.
+O projeto depende de alguns serviços, como o *php-fpm*, *postgres* e *nginx*, dito isso algumas portas são necessárias para que o projeto funcione corretamente, sendo elas a *8000* e *5432*.
 
-Será necessário rodar alguns comandos no seu cmd/terminal e ter o docker instalado.
+Será necessário executar alguns comandos no seu cmd/terminal e ter o docker instalado.
 
-No diretório raíz do projeto rode os seguintes comandos no seu cmd/terminal para criarmos o arquivo ```.env``` de variaveis de ambiente do projeto : 
+No diretório raíz do projeto rode os seguintes comandos no seu cmd/terminal para criarmos o arquivo *.env* de variaveis de ambiente do projeto : 
 
 ``` mv .env.example .env ``` 
 
-Este comando irá renomear o arquivo de exemplo existente, fazendo com que este seja o arquivo usual do projeto,
+Este comando irá renomear o arquivo de exemplo existente, fazendo com que este seja o arquivo de configurações do projeto,
 o mesmo ja está configurado para fúncionar com o container que criaremos a seguir.
 
-Execute o seguinte snipet em seu cmd/terminal :
+Execute o seguinte comando em seu cmd/terminal :
 
 ``` docker-compose up -d --build ```
 
-Feito isso caso não ocorra nenhum problema, o docker irá baixar e configurar as novas dependencias para rodar o projeto.
+Feito isso caso não ocorra nenhum problema, o docker irá baixar e configurar as novas dependencias para que o projeto fúncione.
 
-Após o fim da execução, em seu client GraphQL preencha o endereço do servidor com o host à seguir : 
+Após o fim da execução, em seu client GraphQL preencha o endereço do servidor com o host a seguir : 
 
 [http://localhost:8000/api](http://localhost:8000/api)
 
@@ -47,7 +47,7 @@ Agora poderemos testar nossas requisições.
 
 Minha primeira vez utilizando GraphQL, seguindo a sujestão do teste, obtive o seguinte resultado :
 
-**Realizando Saque de saldo quando Disponível**
+**Realizando Saque de saldo quando disponível**
 
 Para efetuar um saque, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```sacar```
 
@@ -75,9 +75,9 @@ Resposta:
 ```
 A mutation irá validar o valor do saque, caso seja menor que o valor disponível em conta, o saldo da conta será subtraido pelo valor informado ao parâmetro, e retornará os dados atualizados.
 
-**Realizando Saque de saldo quando não Disponível**
+**Realizando Saque de saldo quando indisponível**
 
-Da mesma forma, quando o parâmetro valor informado for maior, que o valor disponível em conta
+usando os mesmos parâmetros do exemplo acima, quando o valor informado for maior, que o saldo disponível em conta, será retornado uma menssagem de erro "Saldo insuficiênte":
 
 Requisição
 
@@ -102,8 +102,6 @@ Resposta:
 }
 }
 ```
-
-Uma menssagem de erro será retornada, e nenhum registro será atualizado.
 
 **Efetuado Depósito em conta**
 
@@ -136,7 +134,7 @@ A mutation irá efetuar um deposito na conta informada e somar com o saldo da co
 
 **Consulta de Saldo**
 
-Para efetuar a consulta de saldo, basta enviar obrigatóriamente os parâmetros ```conta(int)```, para a query ```saldo```
+Para efetuar a consulta de saldo, basta enviar obrigatóriamente os parâmetros ```conta(int)```, para a query ```saldo```.
 
 Requisição:
 
