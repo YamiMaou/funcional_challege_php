@@ -13,39 +13,43 @@ Utilizando PHP + Laravel + Postgres + GraphQL, foi desenvolvido uma API pública
 
 ## Configuração
 
-o projeto depende de alguns serviços, como o php-fpm, postgres e nginx, dito isso algumas portas são necessárias para que o projeto funcione corretamente, sendo elas a 8000 e 5432
-será necessário rodar alguns comandos no seu cmd/terminal e ter o docker instalado.
+O projeto depende de alguns serviços, como o php-fpm, postgres e nginx, dito isso algumas portas são necessárias para que o projeto funcione corretamente, sendo elas a 8000 e 5432.
 
-no diretório raíz do projeto rode os seguintes comandos no seu cmd/terminal para criarmos o arquivo de variaveis de ambiente do projeto nomedo como ```.env```: 
+Será necessário rodar alguns comandos no seu cmd/terminal e ter o docker instalado.
+
+No diretório raíz do projeto rode os seguintes comandos no seu cmd/terminal para criarmos o arquivo de variaveis de ambiente do projeto nomedo como ```.env```: 
 
 ``` mv .env.example .env ``` 
 
-este comando irá renomear o arquivo de exemplo existente, fazendo com que este seja o arquivo usual do projeto. 
+Este comando irá renomear o arquivo de exemplo existente, fazendo com que este seja o arquivo usual do projeto,
 o mesmo ja está configurado para fúncionar com o container que criaremos a seguir.
 
-execute o seguinte snipet em seu cmd/terminal :
+Execute o seguinte snipet em seu cmd/terminal :
 
 ``` docker-compose up -d --build ```
 
-feito isso caso não ocorra nenhum problema, o docker irá baixar e configurar as novas dependencias para rodar o projeto.
+Feito isso caso não ocorra nenhum problema, o docker irá baixar e configurar as novas dependencias para rodar o projeto.
 
-após o fim da execução em seu navegador, em seu client GraphQL preencha o edereço do servidor com o host : 
+Após o fim da execução, em seu client GraphQL preencha o endereço do servidor com o host à seguir : 
 
-[http://localhost:8000/graphql](http://localhost:8000/graphql)
+[http://localhost:8000/api](http://localhost:8000/api)
 
-caso não tenha um client acesse o seguinte endereço :
+Caso não tenha um client acesse o seguinte endereço :
 
 [http://localhost:8000/graphql-playground](http://localhost:8000/graphql-playground)
 
+Não esqueça de preencher o campo "caminho do servidor" com o host informado acima.
 
-agora poderemos testar nossas requisições.
+
+Agora poderemos testar nossas requisições.
 
 ## Requisições
 
 Minha primeira vez utilizando GraphQL, seguindo a sujestão do teste, obtive o seguinte resultado :
 
 **Realizando Saque de saldo quando Disponível**
-para efetuar um saque, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```sacar```
+
+Para efetuar um saque, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```sacar```
 
 Requisição:
 ```
@@ -69,10 +73,11 @@ Resposta:
   }
 }
 ```
-a mutation irá validar o valor do saque, caso seja menor que o valor disponível em conta, o saldo da conta será subtraido pelo valor informado ao parâmetro, e retornará os dados atualizados.
+A mutation irá validar o valor do saque, caso seja menor que o valor disponível em conta, o saldo da conta será subtraido pelo valor informado ao parâmetro, e retornará os dados atualizados.
 
 **Realizando Saque de saldo quando não Disponível**
-da mesma forma, quando o parâmetro valor informado for maior, que o valor disponível em conta
+
+Da mesma forma, quando o parâmetro valor informado for maior, que o valor disponível em conta
 
 Requisição
 
@@ -97,10 +102,12 @@ Resposta:
 }
 }
 ```
-uma menssagem de erro será retornada, e nenhum registro será atualizado.
+
+Uma menssagem de erro será retornada, e nenhum registro será atualizado.
 
 **Efetuado Depósito em conta**
-para efetuar um deposito, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```deposito``` como no modelo de saque.
+
+Para efetuar um deposito, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```deposito``` como no modelo de saque.
 
 Requisição:
 
@@ -125,10 +132,11 @@ Resposta:
   }
 }
 ```
-a mutation irá efetuar um deposito na conta informada e somar com o saldo da conta existente, caso a conta não exista, irá criar uma conta com o saldo igual ao valor informado.
+A mutation irá efetuar um deposito na conta informada e somar com o saldo da conta existente, caso a conta não exista, irá criar uma conta com o saldo igual ao valor informado.
 
 **Consulta de Saldo**
-para efetuar a consulta de saldo, basta enviar obrigatóriamente os parâmetros ```conta(int)```, para a query ```saldo```
+
+Para efetuar a consulta de saldo, basta enviar obrigatóriamente os parâmetros ```conta(int)```, para a query ```saldo```
 
 Requisição:
 
@@ -148,3 +156,6 @@ Resposta:
 }
 ```
 
+# Agradecimentos
+
+[Ephyllus Oliveira](mailto:ephyllus2@gmail.com)
