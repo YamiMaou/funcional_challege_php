@@ -1,5 +1,6 @@
 type Banco {
-  saldo: Float
+  saldo: Float!
+  conta: Int!
 }
 
 type Query {
@@ -7,12 +8,12 @@ type Query {
 }
 
 type Mutation {
-  deposito(
+  depositar(
     conta: Int! 
     valor: Float!
   ): Banco @field(resolver: "BancoMutator@deposito")
 
-  saque(
+  sacar(
     conta: Int! @eq, 
     valor: Float!
   ): Banco @field(resolver: "BancoMutator@saque")
