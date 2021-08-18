@@ -28,8 +28,6 @@ No diretório raíz do projeto rode os seguintes comandos no seu cmd/terminal pa
 
 ``` mv .env.example .env ``` 
 
-para atualizar as chaves do laravel.
-
 Este comando irá renomear o arquivo de exemplo existente, fazendo com que este seja o arquivo de configurações do projeto,
 o mesmo já está configurado para fúncionar com o container que criaremos a seguir.
 
