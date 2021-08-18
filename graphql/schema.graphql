@@ -1,0 +1,19 @@
+type Banco {
+  saldo: Float
+}
+
+type Query {
+  saldo(conta: Int! @eq): Float! @field(resolver: "BancoQuery@saldo")
+}
+
+type Mutation {
+  deposito(
+    conta: Int! 
+    valor: Float!
+  ): Banco @field(resolver: "BancoMutator@deposito")
+
+  saque(
+    conta: Int! @eq, 
+    valor: Float!
+  ): Banco @field(resolver: "BancoMutator@saque")
+}
