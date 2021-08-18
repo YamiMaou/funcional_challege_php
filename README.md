@@ -31,11 +31,11 @@ feito isso caso não ocorra nenhum problema, o docker irá baixar e configurar a
 
 após o fim da execução em seu navegador, em seu client GraphQL preencha o edereço do servidor com o host : 
 
-```[http://localhost:8000/graphql](http://localhost:8000/graphql)```
+[http://localhost:8000/graphql](http://localhost:8000/graphql)
 
 caso não tenha um client acesse o seguinte endereço 
 
-```[http://localhost:8000/graphql-playground](http://localhost:8000/graphql-playground)```
+[http://localhost:8000/graphql-playground](http://localhost:8000/graphql-playground)
 
 
 agora poderemos testar nossas requisições.
