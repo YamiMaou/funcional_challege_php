@@ -125,10 +125,10 @@ Resposta:
   }
 }
 ```
-a mutation irá efetuar um deposito e somar com o saldo da conta existente, caso ela não exista, irá criar uma, com o saldo igual ao valor informado.
+a mutation irá efetuar um deposito na conta informada e somar com o saldo da conta existente, caso a conta não exista, irá criar uma conta com o saldo igual ao valor informado.
 
 **Consulta de Saldo**
-para efetuar a consulta de saldo, basta enviar obrigatóriamente o parâmetros ```conta(int)```, para a query ```saldo```
+para efetuar a consulta de saldo, basta enviar obrigatóriamente os parâmetros ```conta(int)```, para a query ```saldo```
 
 Requisição:
 
