@@ -17,7 +17,7 @@ O projeto depende de alguns serviços, como o php-fpm, postgres e nginx, dito is
 
 Será necessário rodar alguns comandos no seu cmd/terminal e ter o docker instalado.
 
-No diretório raíz do projeto rode os seguintes comandos no seu cmd/terminal para criarmos o arquivo de variaveis de ambiente do projeto nomedo como ```.env```: 
+No diretório raíz do projeto rode os seguintes comandos no seu cmd/terminal para criarmos o arquivo ```.env``` de variaveis de ambiente do projeto : 
 
 ``` mv .env.example .env ``` 
 
