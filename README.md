@@ -17,14 +17,26 @@ o projeto depende de alguns serviços, como o php-fpm, postgres e nginx, dito is
 será necessário rodar alguns comandos no seu cmd/terminal e ter o docker instalado.
 
 no diretório raíz do projeto rode os seguintes comandos no seu cmd/terminal para criarmos o arquivo de variaveis de ambiente do projeto nomedo como ```.env```: 
-``` mv .env.example .env ``` este comando irá renomear o arquivo de exemplo existente, fazendo com que este sejá o arquivo usual do projeto. o mesmo ja está configurado para fúncionar com o container que criaremos a seguir.
+
+``` mv .env.example .env ``` 
+
+este comando irá renomear o arquivo de exemplo existente, fazendo com que este seja o arquivo usual do projeto. 
+o mesmo ja está configurado para fúncionar com o container que criaremos a seguir.
+
 execute o seguinte snipet em seu cmd/terminal :
+
 ``` docker-compose up -d --build ```
+
 feito isso caso não ocorra nenhum problema, o docker irá baixar e configurar as novas dependencias para rodar o projeto.
 
-após o fim da execução em seu navegador, em seu client GraphQL preencha o edereço do servidor com o host : ```[http://localhost:8000/graphql](http://localhost:8000/graphql)```
+após o fim da execução em seu navegador, em seu client GraphQL preencha o edereço do servidor com o host : 
 
-caso não tenha um client acesse o seguinte endereço ```[http://localhost:8000/graphql-playground](http://localhost:8000/graphql-playground)```
+```[http://localhost:8000/graphql](http://localhost:8000/graphql)```
+
+caso não tenha um client acesse o seguinte endereço 
+
+```[http://localhost:8000/graphql-playground](http://localhost:8000/graphql-playground)```
+
 
 agora poderemos testar nossas requisições.
 
