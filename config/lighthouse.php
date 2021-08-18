@@ -22,7 +22,7 @@ return [
         /*
          * Lighthouse creates a named route for convenient URL generation and redirects.
          */
-        'name' => 'graphql',
+        'name' => 'api',
 
         /*
          * Beware that middleware defined here runs before the GraphQL execution phase,
