@@ -33,7 +33,7 @@ após o fim da execução em seu navegador, em seu client GraphQL preencha o ede
 
 [http://localhost:8000/graphql](http://localhost:8000/graphql)
 
-caso não tenha um client acesse o seguinte endereço 
+caso não tenha um client acesse o seguinte endereço :
 
 [http://localhost:8000/graphql-playground](http://localhost:8000/graphql-playground)
 
