@@ -11,7 +11,7 @@ Você deverá garantir que o usuário conseguirá realizar uma movimentação de
 
 Utilizando PHP + Laravel + Postgres + GraphQL, foi desenvolvido uma API pública que simula uma simples movimentação de conta bancária.
 
-# Configuração
+## Configuração
 
 o projeto depende de alguns serviços, como o php-fpm, postgres e nginx, dito isso algumas portas são necessárias para que o projeto funcione corretamente, sendo elas a 8000 e 5432
 será necessário rodar alguns comandos no seu cmd/terminal e ter o docker instalado.
