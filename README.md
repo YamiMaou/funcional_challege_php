@@ -14,7 +14,7 @@ Utilizando PHP + Laravel + Postgres + GraphQL, foi desenvolvido uma API pública
 ## Clonando Repositorio
 abra o seu terminal no diretório desejado para armazenar os arquivos da aplicação, logo em seguida execute o seguinte comando :
 
-```git clone -b dev https://github.com/YamiMaou/funcional_challege_php.git . ```
+```git clone -b dev https://github.com/YamiMaou/funcional_challenge_php.git . ```
 
 este comando irá clonar o *branch* *dev* do repositório da aplicação.
 
