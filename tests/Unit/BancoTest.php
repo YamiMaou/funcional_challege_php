@@ -2,6 +2,8 @@
 
 namespace Tests\Unit;
 
+use App\Models\Banco;
+
 class BancoTest extends \Tests\TestCase
 {
     private $conta = 58994599;
@@ -9,6 +11,7 @@ class BancoTest extends \Tests\TestCase
     public function testDepositarMutation(): void
     {
         $valor = rand(1,9999);
+        
         $banco = \App\Models\Banco::where([
             'conta' => $this->conta
         ])->first();
@@ -20,15 +23,20 @@ class BancoTest extends \Tests\TestCase
                     saldo
                 }
             }");
+
+            $testSaldo = ($banco->saldo+$valor);
+
             if(!$banco){
                 $banco = \App\Models\Banco::where([
                     'conta' => $this->conta
                 ])->first();
-            }
-        $testValor = ($banco->saldo+$valor);
-        $this->assertSame([$testValor],$response->json("data.*.saldo"));
 
-        $this->assertSame([$banco->conta],$response->json("data.*.conta"));
+                $testSaldo = ($banco->saldo+$valor);;
+            }
+
+        $this->assertEquals([$testSaldo],$response->json("data.*.saldo"));
+
+        $this->assertEquals([$banco->conta],$response->json("data.*.conta"));
     }
 
     public function testSaqueDisponivelMutation(): void
