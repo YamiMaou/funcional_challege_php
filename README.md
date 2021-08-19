@@ -40,11 +40,15 @@ Feito isso caso não ocorra nenhum problema, o docker irá baixar e configurar a
 agora vamos criar as tabelas em nossa base de dados, 
 primeio verifique se as imagens estão sendo executadas utilizando o seguinte comando :
 
-``` docker container exec funcional_web php artisan migrate ```
+``` docker ps ```
 
-procure pelo nome **funcional_web** ou **funcional_web_1** na coluna imagem, após validar qual o nome do container, vamos executar o seguinte comando, para atualizar as migrations dentro do container:
 
-``` docker container exec funcional_web php artisan migrate ```
+procure pelo nome **[NOME_DO_DIRETORIO]_web** ou **[NOME_DO_DIRETORIO]_web_1** na coluna imagem, após validar qual o nome do container, vamos executar o seguinte comando, para atualizar as dependencias e atualizar as migrations dentro do container:
+
+``` docker container exec [NOME_DO_DIRETORIO]_web composer update ```
+e 
+
+``` docker container exec [NOME_DO_DIRETORIO]_web php artisan migrate ```
 
 Após o fim da execução, em seu client **GraphQL** preencha o endereço do servidor com o host a seguir : 
 
