@@ -92,7 +92,7 @@ Resposta:
   "data": {
     "depositar": {
       "conta": 54321,
-      "saldo": 121
+      "saldo": 100
     }
   }
 }
@@ -107,7 +107,7 @@ Para efetuar um saque, basta enviar obrigatóriamente os parâmetros ```conta(in
 Requisição:
 ```
 mutation {
-  sacar(conta: 54321, valor: 500) {
+  sacar(conta: 54321, valor: 80) {
     conta
     saldo
   }
@@ -201,7 +201,7 @@ Resposta:
 ```
 {
   "data": {
-    "saldo": 121
+    "saldo": 21
   }
 }
 
