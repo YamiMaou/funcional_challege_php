@@ -15,11 +15,11 @@ Utilizando PHP + Laravel + Postgres + GraphQL, foi desenvolvido uma API pública
 
 ## Clonando Repositorio
 
-abra o seu terminal no diretório desejado para armazenar os arquivos da aplicação, logo em seguida execute o seguinte comando :
+Abra o seu terminal no diretório desejado para armazenar os arquivos da aplicação, logo em seguida execute o seguinte comando :
 
 ```git clone -b dev https://github.com/YamiMaou/funcional_challenge_php.git . ```
 
-este comando irá clonar o **branch** **dev** do repositório da aplicação.
+Este comando irá clonar o **branch** **dev** do repositório da aplicação.
 
 ## Configuração
 
@@ -27,7 +27,7 @@ O projeto depende de alguns serviços, como o **php-fpm**, **postgres** e **ngin
 
 Será necessário executar alguns comandos no seu cmd/terminal e ter o docker instalado.
 
-No diretório raíz do projeto rode os seguintes comandos no seu cmd/terminal para criarmos o arquivo **.env** de variaveis de ambiente do projeto : 
+No diretório raíz do projeto rode os seguintes comandos no seu cmd/terminal para criarmos o arquivo **.env** de variáveis de ambiente do projeto : 
 
 ``` mv .env.example .env ``` 
 
@@ -38,15 +38,15 @@ Execute o seguinte comando em seu cmd/terminal :
 
 ``` docker-compose up -d --build ```
 
-Feito isso caso não ocorra nenhum problema, o docker irá baixar e configurar as novas dependencias para que o projeto fúncione.
+Feito isso caso não ocorra nenhum problema, o docker irá baixar e configurar as novas dependências para que o projeto fúncione.
 
-agora vamos criar as tabelas em nossa base de dados, 
+Agora vamos criar as tabelas em nossa base de dados, 
 primeio verifique se as imagens estão sendo executadas utilizando o seguinte comando :
 
 ``` docker ps ```
 
 
-procure pelo nome **[NOME_DO_DIRETORIO]_web** ou **[NOME_DO_DIRETORIO]_web_1** na coluna **NAMES**, após validar qual o nome do container, vamos executar o seguinte comando, para atualizar as dependencias e atualizar as migrations dentro do container:
+Procure pelo nome **[NOME_DO_DIRETORIO]_web** ou **[NOME_DO_DIRETORIO]_web_1** na coluna **NAMES**, após validar qual o nome do container, vamos executar o seguinte comando, para atualizar as dependencias e atualizar as migrations dentro do container:
 
 ``` docker container exec [NOME_DO_DIRETORIO]_web_1 composer update ```
 e 
@@ -102,7 +102,7 @@ A mutation irá efetuar um deposito na conta informada e somar com o saldo da co
 
 **Realizando Saque de saldo quando disponível**
 
-Para efetuar um saque, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```sacar```
+Para efetuar um saque, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```sacar```.
 
 Requisição:
 ```
@@ -132,7 +132,7 @@ A mutation irá validar o valor do saque, caso seja menor ou igual que o saldo d
 
 Usando os mesmos parâmetros do exemplo acima, quando o valor informado for maior, que o saldo disponível em conta, será retornado uma menssagem de erro "Saldo insuficiênte":
 
-Requisição
+Requisição:
 
 ```
 mutation {
@@ -160,7 +160,7 @@ Resposta:
 
 Quando o valor informado for menor que zero ou nulo, será retornado uma menssagem de erro "Valor para saque informado é inválido.":
 
-Requisição
+Requisição:
 
 ```
 mutation {
