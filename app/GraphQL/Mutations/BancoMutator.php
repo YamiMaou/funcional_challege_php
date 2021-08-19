@@ -31,9 +31,9 @@ class BancoMutator
         if(!$conta)
             return new Error('Conta Inexistente');
         
-        if($conta->saldo < $args['valor'])
+        if($conta->saldo < $args['valor'] || $args['valor'] <= 0)
             return new Error('Saldo insuficiente.');
-
+        
         $conta->saldo = ($conta->saldo - $args['valor']);
         $conta->save();
 
