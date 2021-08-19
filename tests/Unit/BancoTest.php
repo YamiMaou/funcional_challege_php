@@ -11,11 +11,6 @@ class BancoTest extends \Tests\TestCase
     public function testDepositarMutation(): void
     {
         $valor = rand(1,9999);
-        
-        $banco = \App\Models\Banco::where([
-            'conta' => $this->conta
-        ])->first();
-
         $response = $this->graphQL("
             mutation {
                 depositar (conta: {$this->conta}, valor: {$valor}){
@@ -24,24 +19,16 @@ class BancoTest extends \Tests\TestCase
                 }
             }");
 
-            $testSaldo = ($banco->saldo+$valor);
-
-            if(!$banco){
-                $banco = \App\Models\Banco::where([
-                    'conta' => $this->conta
-                ])->first();
-
-                $testSaldo = ($banco->saldo+$valor);;
-            }
-
-        $this->assertEquals([$testSaldo],$response->json("data.*.saldo"));
+        $banco = Banco::where([
+            'conta' => $this->conta
+        ])->first();
 
         $this->assertEquals([$banco->conta],$response->json("data.*.conta"));
     }
 
     public function testSaqueDisponivelMutation(): void
     {
-        $banco = \App\Models\Banco::where([
+        $banco = Banco::where([
             'conta' => $this->conta
         ])->first();
 
@@ -62,7 +49,7 @@ class BancoTest extends \Tests\TestCase
 
     public function testSaqueIndisponivelMutation(): void
     {
-        $banco = \App\Models\Banco::where([
+        $banco = Banco::where([
             'conta' => $this->conta
         ])->first();
 
@@ -81,7 +68,7 @@ class BancoTest extends \Tests\TestCase
 
     public function testSaqueInvalidoMutation(): void
     {
-        $banco = \App\Models\Banco::where([
+        $banco = Banco::where([
             'conta' => $this->conta
         ])->first();
 
@@ -100,7 +87,7 @@ class BancoTest extends \Tests\TestCase
 
     public function testSaldoQuery(): void
     {
-        $banco = \App\Models\Banco::where([
+        $banco = Banco::where([
             'conta' => $this->conta,
         ])->first();
 
@@ -113,7 +100,7 @@ class BancoTest extends \Tests\TestCase
     }
     public function testRemoverContaTeste()
     {
-        $banco = \App\Models\Banco::where([
+        $banco = Banco::where([
             'conta' => $this->conta
         ])->first();
 
