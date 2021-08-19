@@ -16,7 +16,7 @@ abra o seu terminal no diretório desejado para armazenar os arquivos da aplica�
 
 ```git clone -b dev https://github.com/YamiMaou/funcional_challenge_php.git . ```
 
-este comando irá clonar o *branch* *dev* do repositório da aplicação.
+este comando irá clonar o **branch** **dev** do repositório da aplicação.
 
 ## Configuração
 
@@ -36,6 +36,15 @@ Execute o seguinte comando em seu cmd/terminal :
 ``` docker-compose up -d --build ```
 
 Feito isso caso não ocorra nenhum problema, o docker irá baixar e configurar as novas dependencias para que o projeto fúncione.
+
+agora vamos criar as tabelas em nossa base de dados, 
+primeio verifique se as imagens estão sendo executadas utilizando o seguinte comando :
+
+``` docker container exec funcional_web php artisan migrate ```
+
+procure pelo nome **funcional_web** ou **funcional_web_1** na coluna imagem, após validar qual o nome do container, vamos executar o seguinte comando, para atualizar as migrations dentro do container:
+
+``` docker container exec funcional_web php artisan migrate ```
 
 Após o fim da execução, em seu client **GraphQL** preencha o endereço do servidor com o host a seguir : 
 
@@ -159,7 +168,15 @@ Resposta:
     "saldo": 121
   }
 }
+
 ```
+# Executando Testes com PHPUnit
+
+No diretório principal da aplicação execute o seguinte comando :
+``` docker container exec funcional_web php artisan test ```
+
+ele realizará um teste na rota API para verificar se esá online, em seguida irá realizar os testes de transação, e apagar o registro testado.
+
 
 # Agradecimentos
 
