@@ -13,7 +13,7 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: blog
+      POSTGRES_DB: funcional
     ports:
       - "5432:5432"
     volumes: 
