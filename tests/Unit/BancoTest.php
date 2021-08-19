@@ -6,28 +6,6 @@ class BancoTest extends \Tests\TestCase
 {
     private $conta = 58994599;
 
-    public function testSaldoQuery(): void
-    {
-        $banco = \App\Models\Banco::firstOrNew([
-            'conta' => $this->conta,
-        ]);
-
-        $banco->saldo = rand(10,9999);
-
-        $banco->save();
-
-        $response = $this->graphQL("
-            {
-                saldo (conta: {$banco->conta}){
-                    conta
-                    saldo
-                }
-            }");
-
-        $this->assertSame([$banco->conta],$response->json("data.*.conta"));
-
-    }
-
     public function testDepositarlMutation(): void
     {
         $banco = \App\Models\Banco::where([
@@ -86,6 +64,25 @@ class BancoTest extends \Tests\TestCase
         $this->assertSame(["Saldo insuficiente."],$response->json("errors.*.message"));
     }
 
+    public function testSaldoQuery(): void
+    {
+        $banco = \App\Models\Banco::firstOrNew([
+            'conta' => $this->conta,
+        ]);
+
+        $banco->saldo = rand(10,9999);
+
+        $banco->save();
+
+        $response = $this->graphQL("
+            {
+                saldo (conta: {$banco->conta})
+            }");
+
+        $this->assertSame([$banco->saldo],$response->json("data.saldo"));
+
+    }
+    
     public function testRemoverContaTeste()
     {
         $banco = \App\Models\Banco::where([
