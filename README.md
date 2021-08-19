@@ -1,10 +1,12 @@
 # Funcional PHP Challenge
 
 ## Objetivo
+
 Desenvolver uma API em PHP + Laravel que simule algumas funcionalidades de um banco digital.
 Nesta simulação considere que não há necessidade de autenticação.
 
 ## Desafio
+
 Você deverá garantir que o usuário conseguirá realizar uma movimentação de sua conta corrente para quitar uma dívida.
 
 ## Introdução 
@@ -12,6 +14,7 @@ Você deverá garantir que o usuário conseguirá realizar uma movimentação de
 Utilizando PHP + Laravel + Postgres + GraphQL, foi desenvolvido uma API pública que simula uma simples movimentação de conta bancária.
 
 ## Clonando Repositorio
+
 abra o seu terminal no diretório desejado para armazenar os arquivos da aplicação, logo em seguida execute o seguinte comando :
 
 ```git clone -b dev https://github.com/YamiMaou/funcional_challenge_php.git . ```
@@ -97,7 +100,7 @@ A mutation irá validar o valor do saque, caso seja menor que o valor disponíve
 
 **Realizando Saque de saldo quando indisponível**
 
-usando os mesmos parâmetros do exemplo acima, quando o valor informado for maior, que o saldo disponível em conta, será retornado uma menssagem de erro "Saldo insuficiênte":
+Usando os mesmos parâmetros do exemplo acima, quando o valor informado for maior, que o saldo disponível em conta, será retornado uma menssagem de erro "Saldo insuficiênte":
 
 Requisição
 
@@ -122,6 +125,35 @@ Resposta:
 }
 }
 ```
+
+**Realizando Saque de saldo quando valor informado é inválido**
+
+Quando o valor informado menor que zero ou nulo,será retornado uma menssagem de erro "Valor para saque informado é inválido.":
+
+Requisição
+
+```
+mutation {
+  sacar(conta: 54321, valor: -3) {
+    conta
+    saldo
+  }
+}
+```
+Resposta:
+ 
+```
+{
+  "errors": [
+    {
+      "message": "Valor para saque informado é inválido.",
+      ...
+    }
+  ]
+}
+}
+```
+
 
 **Efetuado Depósito em conta**
 
@@ -178,9 +210,9 @@ Resposta:
 
 No diretório principal da aplicação execute o seguinte comando :
 
-``` docker container exec funcional_web php artisan test ```
+``` docker container exec [NOME_DO_DIRETORIO]_web php artisan test ``` ou ``` docker container exec [NOME_DO_DIRETORIO]_web php artisan test ``` dependendo do nome do container criado no seu docker.
 
-ele realizará um teste na rota API para verificar se esá online, em seguida irá realizar os testes de transação, e apagar o registro testado.
+ele realizará um teste na rota API para verificar se esá online, em seguida irá realizar os testes de transação comparando os valores recebidos do GraphQL com a base de dados, em seguida irá apagar o registro testado da base de dados.
 
 
 # Agradecimentos
