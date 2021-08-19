@@ -6,23 +6,29 @@ class BancoTest extends \Tests\TestCase
 {
     private $conta = 58994599;
 
-    public function testDepositarlMutation(): void
+    public function testDepositarMutation(): void
     {
+        $valor = rand(1,9999);
         $banco = \App\Models\Banco::where([
             'conta' => $this->conta
         ])->first();
 
-        $valor = rand(1, $banco->saldo);
-
         $response = $this->graphQL("
             mutation {
-                depositar (conta: {$banco->conta}, valor: {$valor}){
+                depositar (conta: {$this->conta}, valor: {$valor}){
                     conta
                     saldo
                 }
             }");
-        $testValor = ($banco->conta+$valor);
-        $this->assertSame([$testValor],$response->json("data.*.valor"));
+            if(!$banco){
+                $banco = \App\Models\Banco::where([
+                    'conta' => $this->conta
+                ])->first();
+            }
+        $testValor = ($banco->saldo+$valor);
+        $this->assertSame([$testValor],$response->json("data.*.saldo"));
+
+        $this->assertSame([$banco->conta],$response->json("data.*.conta"));
     }
 
     public function testSaqueDisponivelMutation(): void
@@ -41,8 +47,9 @@ class BancoTest extends \Tests\TestCase
                 }
             }");
             
-        $testValor = ($banco->conta+$valor);
-        $this->assertSame([$testValor],$response->json("data.*.valor"));
+        $testValor = ($banco->saldo-$valor);
+        $this->assertSame([$testValor],$response->json("data.*.saldo"));
+        $this->assertSame([$banco->conta],$response->json("data.*.conta"));
     }
 
     public function testSaqueIndisponivelMutation(): void
@@ -64,25 +71,38 @@ class BancoTest extends \Tests\TestCase
         $this->assertSame(["Saldo insuficiente."],$response->json("errors.*.message"));
     }
 
+    public function testSaqueInvalidoMutation(): void
+    {
+        $banco = \App\Models\Banco::where([
+            'conta' => $this->conta
+        ])->first();
+
+        $valor = -3;
+
+        $response = $this->graphQL("
+            mutation {
+                sacar (conta: {$banco->conta}, valor: {$valor}){
+                    conta
+                    saldo
+                }
+            }");
+            
+        $this->assertSame(["Valor para saque informado é inválido."],$response->json("errors.*.message"));
+    }
+
     public function testSaldoQuery(): void
     {
-        $banco = \App\Models\Banco::firstOrNew([
+        $banco = \App\Models\Banco::where([
             'conta' => $this->conta,
-        ]);
-
-        $banco->saldo = rand(10,9999);
-
-        $banco->save();
+        ])->first();
 
         $response = $this->graphQL("
             {
                 saldo (conta: {$banco->conta})
             }");
 
-        $this->assertSame([$banco->saldo],$response->json("data.saldo"));
-
+        $this->assertEquals([$banco->saldo],$response->json("*.saldo"));
     }
-    
     public function testRemoverContaTeste()
     {
         $banco = \App\Models\Banco::where([

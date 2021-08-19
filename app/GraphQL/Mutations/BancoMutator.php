@@ -35,7 +35,7 @@ class BancoMutator
             return new Error('Saldo insuficiente.');
 
         if( $args['valor'] <= 0 || null)
-            return new Error('valor para saque informado é inválido.');
+            return new Error('Valor para saque informado é inválido.');
         
         $conta->saldo = ($conta->saldo - $args['valor']);
         $conta->save();
