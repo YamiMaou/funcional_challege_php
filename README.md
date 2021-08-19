@@ -173,6 +173,7 @@ Resposta:
 # Executando Testes com PHPUnit
 
 No diretório principal da aplicação execute o seguinte comando :
+
 ``` docker container exec funcional_web php artisan test ```
 
 ele realizará um teste na rota API para verificar se esá online, em seguida irá realizar os testes de transação, e apagar o registro testado.
