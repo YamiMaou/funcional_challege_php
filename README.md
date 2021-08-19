@@ -70,6 +70,36 @@ Agora poderemos testar nossas requisições.
 
 Minha primeira vez utilizando **GraphQL**, seguindo a sujestão do teste, obtive o seguinte resultado :
 
+**Efetuado Depósito em conta**
+
+Para efetuar um deposito, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```deposito``` como no modelo de saque.
+
+Requisição:
+
+```
+mutation {
+  depositar(conta: 508427, valor: 100) {
+    conta
+    saldo
+  }
+}
+```
+
+Resposta:
+
+```
+{
+  "data": {
+    "depositar": {
+      "conta": 54321,
+      "saldo": 121
+    }
+  }
+}
+```
+A mutation irá efetuar um deposito na conta informada e somar com o saldo da conta existente, caso a conta não exista, irá criar uma conta com o saldo igual ao valor informado.
+
+
 **Realizando Saque de saldo quando disponível**
 
 Para efetuar um saque, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```sacar```
@@ -153,36 +183,6 @@ Resposta:
 }
 }
 ```
-
-
-**Efetuado Depósito em conta**
-
-Para efetuar um deposito, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```deposito``` como no modelo de saque.
-
-Requisição:
-
-```
-mutation {
-  depositar(conta: 508427, valor: 100) {
-    conta
-    saldo
-  }
-}
-```
-
-Resposta:
-
-```
-{
-  "data": {
-    "depositar": {
-      "conta": 54321,
-      "saldo": 121
-    }
-  }
-}
-```
-A mutation irá efetuar um deposito na conta informada e somar com o saldo da conta existente, caso a conta não exista, irá criar uma conta com o saldo igual ao valor informado.
 
 **Consulta de Saldo**
 
