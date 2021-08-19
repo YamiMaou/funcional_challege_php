@@ -16,6 +16,9 @@ COPY . /var/www
 RUN chmod -R 777 /var/www/storage
 
 RUN php artisan migrate
+
+RUN php artisan db:seed
+
 EXPOSE 8000
 
 ENTRYPOINT [ "php-fpm" ]
