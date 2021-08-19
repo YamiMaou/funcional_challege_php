@@ -46,12 +46,12 @@ primeio verifique se as imagens estão sendo executadas utilizando o seguinte co
 ``` docker ps ```
 
 
-procure pelo nome **[NOME_DO_DIRETORIO]_web** ou **[NOME_DO_DIRETORIO]_web_1** na coluna imagem, após validar qual o nome do container, vamos executar o seguinte comando, para atualizar as dependencias e atualizar as migrations dentro do container:
+procure pelo nome **[NOME_DO_DIRETORIO]_web** ou **[NOME_DO_DIRETORIO]_web_1** na coluna **NAMES**, após validar qual o nome do container, vamos executar o seguinte comando, para atualizar as dependencias e atualizar as migrations dentro do container:
 
-``` docker container exec [NOME_DO_DIRETORIO]_web composer update ```
+``` docker container exec [NOME_DO_DIRETORIO]_web_1 composer update ```
 e 
 
-``` docker container exec [NOME_DO_DIRETORIO]_web php artisan migrate ```
+``` docker container exec [NOME_DO_DIRETORIO]_web_1 php artisan migrate ```
 
 Após o fim da execução, em seu client **GraphQL** preencha o endereço do servidor com o host a seguir : 
 
@@ -72,7 +72,7 @@ Minha primeira vez utilizando **GraphQL**, seguindo a sujestão do teste, obtive
 
 **Efetuado Depósito em conta**
 
-Para efetuar um deposito, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```deposito``` como no modelo de saque.
+Para efetuar um deposito, basta enviar obrigatóriamente os parâmetros ```conta(int)```, ```valor(float)``` para a mutation ```depositar```.
 
 Requisição:
 
@@ -126,7 +126,7 @@ Resposta:
   }
 }
 ```
-A mutation irá validar o valor do saque, caso seja menor que o valor disponível em conta, o saldo da conta será subtraido pelo valor informado ao parâmetro, e retornará os dados atualizados.
+A mutation irá validar o valor do saque, caso seja menor ou igual que o saldo disponível em conta, o saldo da conta será subtraido pelo valor informado ao parâmetro, e retornará os dados atualizados.
 
 **Realizando Saque de saldo quando indisponível**
 
@@ -158,7 +158,7 @@ Resposta:
 
 **Realizando Saque de saldo quando valor informado é inválido**
 
-Quando o valor informado menor que zero ou nulo,será retornado uma menssagem de erro "Valor para saque informado é inválido.":
+Quando o valor informado for menor que zero ou nulo, será retornado uma menssagem de erro "Valor para saque informado é inválido.":
 
 Requisição
 
@@ -210,9 +210,9 @@ Resposta:
 
 No diretório principal da aplicação execute o seguinte comando :
 
-``` docker container exec [NOME_DO_DIRETORIO]_web php artisan test ``` ou ``` docker container exec [NOME_DO_DIRETORIO]_web php artisan test ``` dependendo do nome do container criado no seu docker.
+``` docker container exec [NOME_DO_DIRETORIO]_web_1 php artisan test ``` dependendo do nome do container criado no seu docker.
 
-ele realizará um teste na rota API para verificar se esá online, em seguida irá realizar os testes de transação comparando os valores recebidos do GraphQL com a base de dados, em seguida irá apagar o registro testado da base de dados.
+O PHPUnit realizará um teste na rota **/api** para verificar se a mesma está online, em seguida irá realizar os testes de transação com o GraphQL.
 
 
 # Agradecimentos
