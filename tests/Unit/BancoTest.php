@@ -28,6 +28,25 @@ class BancoTest extends \Tests\TestCase
 
     }
 
+    public function testDepositarlMutation(): void
+    {
+        $banco = \App\Models\Banco::where([
+            'conta' => $this->conta
+        ])->first();
+
+        $valor = rand(1, $banco->saldo);
+
+        $response = $this->graphQL("
+            mutation {
+                depositar (conta: {$banco->conta}, valor: {$valor}){
+                    conta
+                    saldo
+                }
+            }");
+        $testValor = ($banco->conta+$valor);
+        $this->assertSame([$testValor],$response->json("data.*.valor"));
+    }
+
     public function testSaqueDisponivelMutation(): void
     {
         $banco = \App\Models\Banco::where([
@@ -38,13 +57,14 @@ class BancoTest extends \Tests\TestCase
 
         $response = $this->graphQL("
             mutation {
-                saque (conta: {$banco->conta}, valor: {$valor}){
+                sacar (conta: {$banco->conta}, valor: {$valor}){
                     conta
                     saldo
                 }
             }");
             
-        $this->assertSame([$banco->conta],$response->json("data.*.conta"));
+        $testValor = ($banco->conta+$valor);
+        $this->assertSame([$testValor],$response->json("data.*.valor"));
     }
 
     public function testSaqueIndisponivelMutation(): void
@@ -57,7 +77,7 @@ class BancoTest extends \Tests\TestCase
 
         $response = $this->graphQL("
             mutation {
-                saque (conta: {$banco->conta}, valor: {$valor}){
+                sacar (conta: {$banco->conta}, valor: {$valor}){
                     conta
                     saldo
                 }
